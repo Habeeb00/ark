@@ -1605,7 +1605,7 @@ ol {
     left: auto;
     transform: none;
     width: 90%;
-    margin: 40px auto 20px;
+    margin: auto auto;
     z-index: 2;
     padding-top: 0;
   }
