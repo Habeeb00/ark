@@ -1582,6 +1582,7 @@ ol {
 
   .hero {
     height: 100vh;
+    height: 100svh;
     padding-bottom: 0;
     position: relative;
   }
@@ -1609,6 +1610,7 @@ ol {
     right: 0;
     top: auto;
     bottom: 35vh;
+    bottom: 35svh;
     width: 100%;
     height: auto;
     z-index: 1;
@@ -1677,6 +1679,7 @@ ol {
 
   .section-why {
     height: 100vh;
+    height: 100svh;
     display: flex;
     flex-direction: column;
   }
