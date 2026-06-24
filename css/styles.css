@@ -1592,9 +1592,7 @@ ol {
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex: 1;
-    padding-top: 60px;
     position: relative;
     z-index: 2;
   }
@@ -1605,9 +1603,10 @@ ol {
     left: auto;
     transform: none;
     width: 90%;
-    margin: 0 auto;
-    z-index: 2;
+    margin: auto auto 0;
     padding-top: 0;
+    padding-bottom: 40px;
+    z-index: 2;
   }
 
   .hero__image {
