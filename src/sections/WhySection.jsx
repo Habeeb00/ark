@@ -85,10 +85,16 @@ export function WhySection() {
         </div>
         <div className="builders">
           <div className="builders__avatars">
-            <img className="builders__avatar" src="assets/aravind.png" alt="Aravind" />
-            <img className="builders__avatar" src="assets/habeeb.png" alt="Habeeb" />
+            {[
+              { src: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aravind_p_K3OzNMC.jpg', name: 'Aravind' },
+              { src: 'https://media.licdn.com/dms/image/v2/D5603AQG4hoYU-ehL-Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718268749172?e=2147483647&v=beta&t=gE2RhsvETU0RvRMLNJDCNgFx0bPc8KBCrOwSy3ZML_Q', name: 'Habeeb' },
+            ].map((b) => (
+              <div key={b.name} className="builders__avatar-wrap">
+                <span className="builders__name">{b.name}</span>
+                <img className="builders__avatar" src={b.src} alt={b.name} />
+              </div>
+            ))}
           </div>
-          <div className="builders__tooltip">Habeeb</div>
         </div>
       </div>
     </section>

@@ -6,7 +6,10 @@ export function BuilderAvatars({ builders }) {
   return (
     <div className="card__builders">
       {builders.map((b, i) => (
-        <img key={i} className="card__builder-avatar" src={b.src} alt={b.alt} />
+        <div key={i} className="card__builder-wrap">
+          <span className="card__builder-name">{b.name}</span>
+          <img className="card__builder-avatar" src={b.src} alt={b.alt} />
+        </div>
       ))}
     </div>
   );

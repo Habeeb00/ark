@@ -1,6 +1,14 @@
 export const BUILDERS = {
-  habeeb: { src: 'assets/habeeb.png', alt: 'Habeeb' },
-  aravind: { src: 'assets/aravind.png', alt: 'Aravind' },
+  habeeb: {
+    src: 'https://media.licdn.com/dms/image/v2/D5603AQG4hoYU-ehL-Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718268749172?e=2147483647&v=beta&t=gE2RhsvETU0RvRMLNJDCNgFx0bPc8KBCrOwSy3ZML_Q',
+    alt: 'Habeeb',
+    name: 'Habeeb',
+  },
+  aravind: {
+    src: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aravind_p_K3OzNMC.jpg',
+    alt: 'Aravind',
+    name: 'Aravind',
+  },
 };
 
 export const PROJECTS = [
@@ -82,25 +90,17 @@ export const PROJECTS = [
 
 export const BLOGS = [
   { id: 'building-for-public-welfare-1', slug: 'building-for-public-welfare', title: 'Building for public welfare', date: 'January 2026', author: 'Habeeb' },
-  { id: 'building-for-public-welfare-2', slug: 'building-for-public-welfare', title: 'Building for public welfare', date: 'January 2026', author: 'Habeeb' },
-  { id: 'building-for-public-welfare-3', slug: 'building-for-public-welfare', title: 'Building for public welfare', date: 'January 2026', author: 'Habeeb' },
-  { id: 'building-for-public-welfare-4', slug: 'building-for-public-welfare', title: 'Building for public welfare', date: 'January 2026', author: 'Habeeb' },
 ];
 
 export const INITIAL_PAINS = [
-  { id: 1, text: '“Too many browser tabs open, I lose everything”', status: 'open', votes: 74 },
-  { 
-    id: 2, 
-    text: '“Too many browser tabs open, I lose everything”', 
-    status: 'solved', 
-    votes: 74,
-    toolName: 'Linkspaces',
-    toolUrl: 'https://linkspaces.ark.build',
-    toolDescription: 'Organise all your links across multiple workspaces.'
-  },
-  { id: 3, text: '“Too many browser tabs open, I lose everything”', status: 'open', votes: 74 },
-  { id: 4, text: '“Too many browser tabs open, I lose everything”', status: 'open', votes: 74 },
-  { id: 5, text: '“Too many browser tabs open, I lose everything”', status: 'open', votes: 74 },
-  { id: 6, text: '“Too many browser tabs open, I lose everything”', status: 'open', votes: 74 },
-  { id: 7, text: '“Too many browser tabs open, I lose everything”', status: 'building', votes: 74 },
+  { id: 1, text: '"Too many browser tabs open, I lose everything"', status: 'solved', votes: 74, toolName: 'Linkspaces', toolUrl: 'https://linkspaces.me/', toolDescription: 'Organise all your links across multiple workspaces.' },
+  { id: 2, text: '"I keep forgetting which Figma frame I saved my work in"', status: 'solved', votes: 61, toolName: 'SaveFrame', toolUrl: 'https://www.figma.com/community/plugin/1500778509486639308', toolDescription: 'Manage and save custom Figma frames easily.' },
+  { id: 3, text: '"Creating QR codes for events is painful and ugly"', status: 'solved', votes: 48, toolName: 'MakeQR', toolUrl: 'https://www.makeqr.site/', toolDescription: 'Create custom, beautiful QR codes.' },
+  { id: 4, text: '"Billboards in my city are just noise pollution"', status: 'solved', votes: 39, toolName: 'The Billboard', toolUrl: 'https://thebillboard.site', toolDescription: 'Meaningful digital billboards for communities.' },
+  { id: 5, text: '"I can\'t figure out which variables are detached in my Figma file"', status: 'building', votes: 55 },
+  { id: 6, text: '"My design handoffs always have ruler/guide chaos"', status: 'building', votes: 42 },
+  { id: 7, text: '"I wish I could see all my saved links without opening 10 apps"', status: 'open', votes: 88 },
+  { id: 8, text: '"There is no simple way to share a curated list of links with a team"', status: 'open', votes: 67 },
+  { id: 9, text: '"I lose context every time I switch between projects in Figma"', status: 'open', votes: 53 },
+  { id: 10, text: '"No app lets me schedule and track my personal pain points over time"', status: 'open', votes: 31 },
 ];
