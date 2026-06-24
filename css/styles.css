@@ -1581,38 +1581,45 @@ ol {
   }
 
   .hero {
-    height: 100vh;
-    height: 100svh;
-    padding-bottom: 0;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 24px;
     position: relative;
   }
 
   .hero .page-container {
-    height: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     position: relative;
     z-index: 2;
   }
 
   .hero__content {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     width: 90%;
+    margin: 40px auto 20px;
     z-index: 2;
     padding-top: 0;
-    margin: 0;
   }
 
   .hero__image {
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: relative;
+    left: auto;
+    right: auto;
     top: auto;
-    bottom: 35vh;
-    bottom: 35svh;
+    bottom: auto;
     width: 100%;
     height: auto;
+    margin-top: auto;
+    margin-bottom: 20px;
     z-index: 1;
   }
 
@@ -1624,14 +1631,15 @@ ol {
 
   /* Responsive Trending Widget */
   .hero__trending {
-    bottom: 60px;
-    left: 16px;
-    right: 16px;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
     transform: none;
     width: auto;
     max-width: none;
+    margin: 0 16px 20px;
     padding: 12px 16px;
-    margin: 0 auto;
   }
   
   .hero__trending:hover {
@@ -1678,8 +1686,9 @@ ol {
   }
 
   .section-why {
-    height: 100vh;
-    height: 100svh;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
   }
