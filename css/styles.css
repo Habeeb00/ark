@@ -1174,14 +1174,30 @@ ol {
 
 /* Contact Box */
 .contact-box {
-  background: var(--dark2);
   width: 100%;
-  max-width: 826px;
-  margin: 100px auto 0;
+  max-width: 760px;
+  margin: 80px auto 0;
   position: relative;
-  border-radius: 0;
-  padding: 50px 38px;
+  background: rgba(18, 18, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 48px 48px 40px;
   box-sizing: border-box;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.contact-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
 }
 
 .contact-box__inner {
@@ -1249,19 +1265,68 @@ ol {
   align-items: center;
   justify-content: center;
   background: var(--dark5);
-  border-radius: 6px;
-  padding: 8px 20px;
+  border-radius: 10px;
+  padding: 10px 24px;
   font-family: var(--font-satoshi);
   font-weight: 700;
   font-size: 13px;
   color: var(--dark1);
   border: 1px solid var(--dark5);
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 6px;
+  letter-spacing: 0.02em;
 }
 
 .contact-box__submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================
+   FLOATING SOCIAL DOCK
+   ========================================== */
+.social-dock {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-dock__btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 24, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.social-dock__btn:hover {
+  transform: translateY(-3px);
+  background: rgba(35, 35, 42, 0.95);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.social-dock__btn img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0.85);
+  transition: filter 0.2s ease;
+}
+
+.social-dock__btn:hover img {
+  filter: brightness(1);
 }
 
 /* ==========================================

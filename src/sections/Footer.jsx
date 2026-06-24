@@ -18,17 +18,10 @@ export function Footer() {
               <img src="assets/arrow.svg" alt="" />
             </a>
           </div>
-          <div className="footer__socials">
-            <a href="https://www.instagram.com/arklab.co/" target="_blank" rel="noopener noreferrer" className="footer__social-btn" aria-label="Instagram">
-              <img src="assets/instagram.svg" alt="Instagram" />
-            </a>
-            <a href="#" className="footer__social-btn" aria-label="LinkedIn">
-              <img src="assets/linkedin.svg" alt="LinkedIn" />
-            </a>
-          </div>
         </div>
       </div>
       <p className="footer__quote">"no pain is small"</p>
     </footer>
   );
 }
+

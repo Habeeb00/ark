@@ -68,12 +68,28 @@ function App() {
     return <ManifestoPage onNavigate={navigate} />;
   }
   
+  // Floating social dock — shown on all pages
+  const SocialDock = () => (
+    <div className="social-dock">
+      <a href="https://www.instagram.com/arklab.co/" target="_blank" rel="noopener noreferrer" className="social-dock__btn" aria-label="Instagram">
+        <img src="assets/instagram.svg" alt="Instagram" />
+      </a>
+      <a href="#" className="social-dock__btn" aria-label="LinkedIn">
+        <img src="assets/linkedin.svg" alt="LinkedIn" />
+      </a>
+    </div>
+  );
+
+  if (route === '/manifesto') {
+    return <><ManifestoPage onNavigate={navigate} /><SocialDock /></>;
+  }
+  
   if (route === '/blog') {
-    return <BlogPage onNavigate={navigate} />;
+    return <><BlogPage onNavigate={navigate} /><SocialDock /></>;
   }
   
   if (route.startsWith('/blog/')) {
-    return <BlogPreviewPage onNavigate={navigate} />;
+    return <><BlogPreviewPage onNavigate={navigate} /><SocialDock /></>;
   }
 
   // Home layout
@@ -84,6 +100,7 @@ function App() {
       <BuildSection />
       <PainBoardSection pains={pains} setPains={setPains} />
       <Footer />
+      <SocialDock />
     </React.Fragment>
   );
 }

@@ -99,8 +99,5 @@ export const INITIAL_PAINS = [
   { id: 4, text: '"Billboards in my city are just noise pollution"', status: 'solved', votes: 39, toolName: 'The Billboard', toolUrl: 'https://thebillboard.site', toolDescription: 'Meaningful digital billboards for communities.' },
   { id: 5, text: '"I can\'t figure out which variables are detached in my Figma file"', status: 'building', votes: 55 },
   { id: 6, text: '"My design handoffs always have ruler/guide chaos"', status: 'building', votes: 42 },
-  { id: 7, text: '"I wish I could see all my saved links without opening 10 apps"', status: 'open', votes: 88 },
-  { id: 8, text: '"There is no simple way to share a curated list of links with a team"', status: 'open', votes: 67 },
-  { id: 9, text: '"I lose context every time I switch between projects in Figma"', status: 'open', votes: 53 },
-  { id: 10, text: '"No app lets me schedule and track my personal pain points over time"', status: 'open', votes: 31 },
+  { id: 7, text: '"I lose context every time I switch between projects in Figma"', status: 'open', votes: 53 },
 ];
