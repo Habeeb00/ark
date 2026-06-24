@@ -767,7 +767,7 @@ ol {
 }
 
 .section-painboard__content {
-  width: 100%;
+  width: var(--content-width);
   margin: 0 auto;
   padding: 100px 0 40px;
 }
@@ -1559,13 +1559,14 @@ ol {
   .navbar,
   .section-why__content-wrapper,
   .section-build__grid,
-  .section-painboard__content,
   .footer__inner {
     width: 90%;
     max-width: var(--content-width);
   }
 
   .section-painboard__content {
+    width: 90%;
+    max-width: var(--content-width);
     padding-top: 60px;
   }
 

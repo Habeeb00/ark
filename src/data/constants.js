@@ -20,6 +20,7 @@ export const PROJECTS = [
     title: 'Chatglider',
     description: 'Makes chatbot flows actually understandable. Less friction, better conversations.',
     builders: [BUILDERS.habeeb],
+    href: 'https://chromewebstore.google.com/detail/chat-glider/fhkgjkddpccbplckbgljgofbmppdkmpc',
   },
   {
     id: 3,
@@ -75,6 +76,7 @@ export const PROJECTS = [
     title: 'Jugaad',
     description: 'A calendar integration for the Hub app of TinkerHub.',
     builders: [BUILDERS.aravind, BUILDERS.habeeb],
+    href: 'https://jugadhub.vercel.app/',
   },
 ];
 
