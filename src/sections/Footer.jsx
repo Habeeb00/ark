@@ -1,13 +1,14 @@
 import React from 'react';
+import { SectionBanner } from '../components/SectionBanner';
 
 export function Footer() {
   return (
     <footer className="footer" id="footer">
+      <SectionBanner label="[04] WANT TO CONTRIBUTE?" />
       <div className="footer__inner">
         <div className="footer__branding">ark</div>
         <div className="footer__content-col">
           <div className="footer__cta">
-            <p className="footer__cta-label">[04] WANT TO CONTRIBUTE?</p>
             <h2 className="footer__cta-heading">
               Lets solve<br />
               <span className="italic">Pains</span> <span className="bold">!</span>
