@@ -3,16 +3,8 @@
    ======================================== */
 
 /* --- Fonts --- */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&display=swap');
+/* (Loaded via HTML link tags in index.html for reliable mobile rendering) */
 
-@font-face {
-  font-family: 'PP Editorial New';
-  src: url('https://webfontworld.github.io/pangram/PPEditorialNew-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
 
 /* --- CSS Variables --- */
 :root {
@@ -43,7 +35,7 @@
   --product-text: #c85a4b;
 
   --font-satoshi: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-editorial: 'PP Editorial New', Georgia, serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'Geist Mono', 'SF Mono', 'Fira Code', monospace;
 
   --content-width: 980px;
