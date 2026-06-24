@@ -882,8 +882,6 @@ ol {
 /* Pain List */
 .painboard-inner {
   width: 100%;
-  max-width: 826px;
-  margin: 0 auto;
 }
 
 .pain-list {
