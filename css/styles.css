@@ -82,6 +82,10 @@
   --product-border: #2a1714;
   --product-text: #c85a4b;
 
+  --plugin-bg: #0d0a1a;
+  --plugin-border: #1e1530;
+  --plugin-text: #9d7fd4;
+
   --font-satoshi: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-editorial: 'PP Editorial New', Georgia, serif;
   --font-mono: 'Geist Mono', 'SF Mono', 'Fira Code', monospace;
@@ -671,6 +675,12 @@ ol {
   background-color: var(--product-bg);
   border-color: var(--product-border);
   color: var(--product-text);
+}
+
+.card__tag--plugin {
+  background-color: var(--plugin-bg);
+  border-color: var(--plugin-border);
+  color: var(--plugin-text);
 }
 
 .card__usage {

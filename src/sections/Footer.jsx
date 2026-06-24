@@ -19,7 +19,7 @@ export function Footer() {
             </a>
           </div>
           <div className="footer__socials">
-            <a href="#" className="footer__social-btn" aria-label="Instagram">
+            <a href="https://www.instagram.com/arklab.co/" target="_blank" rel="noopener noreferrer" className="footer__social-btn" aria-label="Instagram">
               <img src="assets/instagram.svg" alt="Instagram" />
             </a>
             <a href="#" className="footer__social-btn" aria-label="LinkedIn">

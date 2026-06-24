@@ -1,8 +1,13 @@
 import React from 'react';
 
 export function ViewButton({ href = '#' }) {
+  const isExternal = href && href !== '#';
   return (
-    <a href={href} className="card__view-btn">
+    <a
+      href={href}
+      className="card__view-btn"
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
       View <span className="arrow">→</span>
     </a>
   );
