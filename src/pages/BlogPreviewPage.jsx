@@ -24,7 +24,7 @@ export function BlogPreviewPage({ onNavigate }) {
           </a>
 
           <img 
-            src="assets/blog-cover.png" 
+            src="/assets/banner.png" 
             alt="Blog cover — scenic illustration" 
             className="blog-preview__cover animate-fade-in-up delay-100" 
           />

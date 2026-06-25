@@ -31,7 +31,7 @@ export function Navbar({ activePage, onNavigate }) {
     <nav className="navbar" style={{ opacity, transition: 'opacity 0.2s' }}>
       <div className="navbar__logo">
         <a href="/" onClick={(e) => handleLinkClick(e, '/')} aria-label="ark home">
-          <img src="assets/ark-logo.svg" alt="ark logo" style={{ height: '100%', width: 'auto' }} />
+          <img src="/assets/ark-logo.svg" alt="ark logo" style={{ height: '100%', width: 'auto' }} />
         </a>
       </div>
       <div className="navbar__links">
