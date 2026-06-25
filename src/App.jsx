@@ -13,7 +13,26 @@ function App() {
   const [route, setRoute] = useState(window.location.pathname);
   const [pains, setPains] = useState(() => {
     const saved = localStorage.getItem('ark_pains');
-    return saved ? JSON.parse(saved) : INITIAL_PAINS;
+    let loaded = saved ? JSON.parse(saved) : INITIAL_PAINS;
+    if (Array.isArray(loaded)) {
+      loaded = loaded.filter(p => {
+        if (!p || !p.text) return false;
+        const norm = p.text.toLowerCase();
+        return !norm.includes("i want no pain") && !norm.includes("no pain");
+      });
+      const seen = new Set();
+      loaded = loaded.filter(p => {
+        const textKey = p.text.trim().toLowerCase();
+        if (seen.has(textKey)) return false;
+        seen.add(textKey);
+        return true;
+      });
+      // Save sanitized list back to localStorage
+      localStorage.setItem('ark_pains', JSON.stringify(loaded));
+    } else {
+      loaded = INITIAL_PAINS;
+    }
+    return loaded;
   });
 
   useEffect(() => {
@@ -67,29 +86,16 @@ function App() {
   if (route === '/manifesto') {
     return <ManifestoPage onNavigate={navigate} />;
   }
-  
-  // Floating social dock — shown on all pages
-  const SocialDock = () => (
-    <div className="social-dock">
-      <a href="https://www.instagram.com/arklab.co/" target="_blank" rel="noopener noreferrer" className="social-dock__btn" aria-label="Instagram">
-        <img src="assets/instagram.svg" alt="Instagram" />
-      </a>
-      <a href="#" className="social-dock__btn" aria-label="LinkedIn">
-        <img src="assets/linkedin.svg" alt="LinkedIn" />
-      </a>
-    </div>
-  );
-
   if (route === '/manifesto') {
-    return <><ManifestoPage onNavigate={navigate} /><SocialDock /></>;
+    return <ManifestoPage onNavigate={navigate} />;
   }
   
   if (route === '/blog') {
-    return <><BlogPage onNavigate={navigate} /><SocialDock /></>;
+    return <BlogPage onNavigate={navigate} />;
   }
   
   if (route.startsWith('/blog/')) {
-    return <><BlogPreviewPage onNavigate={navigate} /><SocialDock /></>;
+    return <BlogPreviewPage onNavigate={navigate} />;
   }
 
   // Home layout
@@ -100,7 +106,6 @@ function App() {
       <BuildSection />
       <PainBoardSection pains={pains} setPains={setPains} />
       <Footer />
-      <SocialDock />
     </React.Fragment>
   );
 }

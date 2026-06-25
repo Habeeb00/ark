@@ -6,7 +6,6 @@ export function Footer() {
     <footer className="footer" id="footer">
       <SectionBanner label="[04] WANT TO CONTRIBUTE?" />
       <div className="footer__inner">
-        <div className="footer__branding">ark</div>
         <div className="footer__content-col">
           <div className="footer__cta">
             <h2 className="footer__cta-heading">
@@ -19,9 +18,18 @@ export function Footer() {
             </a>
           </div>
         </div>
+        <div className="footer__socials">
+          <a href="https://www.instagram.com/arklab.co/" target="_blank" rel="noopener noreferrer" className="footer__social-btn" aria-label="Instagram">
+            <img src="assets/instagram.svg" alt="Instagram" />
+          </a>
+          <a href="#" className="footer__social-btn" aria-label="LinkedIn">
+            <img src="assets/linkedin.svg" alt="LinkedIn" />
+          </a>
+        </div>
       </div>
       <p className="footer__quote">"no pain is small"</p>
     </footer>
   );
 }
+
 
