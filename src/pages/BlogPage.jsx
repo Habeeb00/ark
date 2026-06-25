@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { BLOGS } from '../data/constants';
 
-export function BlogPage({ onNavigate }) {
+export function BlogPage({ onNavigate, onSearchOpen }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -10,7 +10,7 @@ export function BlogPage({ onNavigate }) {
   return (
     <div className="page-blog page-spring-entry">
       <div className="page-container">
-        <Navbar activePage="blog" onNavigate={onNavigate} />
+        <Navbar activePage="blog" onNavigate={onNavigate} onSearchOpen={onSearchOpen} />
 
         <div className="content-container">
           <h1 className="page-blog__title animate-fade-in-up">Blogs</h1>

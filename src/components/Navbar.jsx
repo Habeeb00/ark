@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export function Navbar({ activePage, onNavigate }) {
+export function Navbar({ activePage, onNavigate, onSearchOpen }) {
   const [opacity, setOpacity] = useState(1);
   const lastScroll = useRef(0);
 
@@ -55,6 +55,24 @@ export function Navbar({ activePage, onNavigate }) {
         >
           painboard
         </a>
+        <a 
+          href="/submit-tool" 
+          className={activePage === 'submit-tool' ? 'active' : ''}
+          onClick={(e) => handleLinkClick(e, '/submit-tool')}
+        >
+          submit tool
+        </a>
+        <button 
+          className="navbar__search-btn"
+          onClick={onSearchOpen}
+          aria-label="Search"
+          title="Search (Ctrl+K)"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="navbar__search-icon">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </button>
       </div>
     </nav>
   );

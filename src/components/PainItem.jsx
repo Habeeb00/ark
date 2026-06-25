@@ -13,12 +13,18 @@ export function PainItem({ pain, toggleVote, onSolve }) {
       </div>
       <div className="pain-item__content">
         <p className="pain-item__text">{pain.text}</p>
-        <PainTag status={pain.status} />
+        <div className="pain-item__tags">
+          <PainTag status={pain.status} />
+          {pain.hasPendingSolution && (
+            <span className="pain-item__tag pain-item__tag--pending">PENDING REVIEW</span>
+          )}
+        </div>
       </div>
       <PainAction 
         status={pain.status} 
-        href={pain.toolUrl} 
+        href={pain.tool_url || pain.toolUrl} 
         onClick={() => onSolve(pain.id)} 
+        hasPendingSolution={pain.hasPendingSolution}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 
-export function ManifestoPage({ onNavigate }) {
+export function ManifestoPage({ onNavigate, onSearchOpen }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -9,7 +9,7 @@ export function ManifestoPage({ onNavigate }) {
   return (
     <div className="page-manifesto page-spring-entry">
       <div className="page-container">
-        <Navbar activePage="manifesto" onNavigate={onNavigate} />
+        <Navbar activePage="manifesto" onNavigate={onNavigate} onSearchOpen={onSearchOpen} />
 
         <div className="content-container">
           <h1 className="manifesto__title animate-fade-in-up">Manifesto</h1>

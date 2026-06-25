@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 
-export function BlogPreviewPage({ onNavigate }) {
+export function BlogPreviewPage({ onNavigate, onSearchOpen }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -9,7 +9,7 @@ export function BlogPreviewPage({ onNavigate }) {
   return (
     <div className="page-blog-preview page-spring-entry">
       <div className="page-container">
-        <Navbar activePage="blog" onNavigate={onNavigate} />
+        <Navbar activePage="blog" onNavigate={onNavigate} onSearchOpen={onSearchOpen} />
 
         <div className="content-container">
           <a 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SectionBanner } from '../components/SectionBanner';
 import { SortTab } from '../components/Buttons';
 import { PainItem } from '../components/PainItem';
 
-export function PainBoardSection({ pains, setPains }) {
+export function PainBoardSection({ pains, setPains, onAddPain, onToggleVote, onSubmitSolution }) {
   const [filter, setFilter] = useState('all');
 
   const [painTitle, setPainTitle] = useState('');
@@ -16,7 +16,15 @@ export function PainBoardSection({ pains, setPains }) {
   const [toolName, setToolName] = useState('');
   const [toolUrl, setToolUrl] = useState('');
   const [toolDescription, setToolDescription] = useState('');
+  const [contributorName, setContributorName] = useState('');
+  const [contributorEmail, setContributorEmail] = useState('');
+  const [photoFile, setPhotoFile] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
   const [formError, setFormError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const fileInputRef = useRef(null);
 
   // Sorting States
   const [sortBy, setSortBy] = useState('most-felt');
@@ -68,7 +76,8 @@ export function PainBoardSection({ pains, setPains }) {
     solved: pains.filter(p => p.status === 'solved').length,
   };
 
-  const toggleVote = (id) => {
+  const toggleVote = async (id) => {
+    // Optimistic update
     const updated = pains.map(p => {
       if (p.id === id) {
         const voted = !p.voted;
@@ -83,36 +92,33 @@ export function PainBoardSection({ pains, setPains }) {
     });
 
     setPains(updated);
-    localStorage.setItem('ark_pains', JSON.stringify(updated));
     
     setTimeout(() => {
       setPains(current => current.map(p => p.id === id ? { ...p, scaling: false } : p));
     }, 150);
+
+    // Persist to Supabase
+    if (onToggleVote) {
+      await onToggleVote(id);
+    }
   };
 
-  const handleAddPain = () => {
+  const handleAddPain = async () => {
     if (!painTitle.trim()) {
       setTitleError(true);
       setTimeout(() => setTitleError(false), 2000);
       return;
     }
 
-    const newPain = {
-      id: Date.now(),
-      text: `“${painTitle.trim()}”`,
-      status: 'open',
-      votes: 1,
-      voted: true,
-    };
-
-    const updated = [newPain, ...pains];
-    setPains(updated);
-    localStorage.setItem('ark_pains', JSON.stringify(updated));
-
-    setPainTitle('');
-    setPainDescription('');
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 1500);
+    if (onAddPain) {
+      const newPain = await onAddPain(painTitle, painDescription);
+      if (newPain) {
+        setPainTitle('');
+        setPainDescription('');
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 1500);
+      }
+    }
   };
 
   // Solution modal handlers
@@ -121,41 +127,58 @@ export function PainBoardSection({ pains, setPains }) {
     setToolName('');
     setToolUrl('');
     setToolDescription('');
+    setContributorName('');
+    setContributorEmail('');
+    setPhotoFile(null);
+    setPhotoPreview(null);
     setFormError(false);
+    setIsSubmitted(false);
   };
 
   const handleCloseSolveModal = () => {
     setSolvingPainId(null);
+    setIsSubmitted(false);
   };
 
-  const handleSolveSubmit = () => {
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPhotoFile(file);
+      const reader = new FileReader();
+      reader.onload = (ev) => setPhotoPreview(ev.target.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSolveSubmit = async () => {
     if (!toolName.trim() || !toolUrl.trim()) {
       setFormError(true);
       return;
     }
 
-    // Ensure URL has protocol
-    let formattedUrl = toolUrl.trim();
-    if (!/^https?:\/\//i.test(formattedUrl)) {
-      formattedUrl = 'https://' + formattedUrl;
+    setIsSubmitting(true);
+    setFormError(false);
+
+    if (onSubmitSolution) {
+      const result = await onSubmitSolution(solvingPainId, {
+        toolName,
+        toolUrl,
+        toolDescription,
+        contributorName,
+        contributorEmail,
+        photoFile,
+      });
+
+      if (result) {
+        setIsSubmitted(true);
+        // Mark the pain as having a pending solution locally
+        setPains(current =>
+          current.map(p => p.id === solvingPainId ? { ...p, hasPendingSolution: true } : p)
+        );
+      }
     }
 
-    const updated = pains.map(p => {
-      if (p.id === solvingPainId) {
-        return {
-          ...p,
-          status: 'solved',
-          toolName: toolName.trim(),
-          toolUrl: formattedUrl,
-          toolDescription: toolDescription.trim(),
-        };
-      }
-      return p;
-    });
-
-    setPains(updated);
-    localStorage.setItem('ark_pains', JSON.stringify(updated));
-    setSolvingPainId(null);
+    setIsSubmitting(false);
   };
 
   return (
@@ -264,49 +287,143 @@ export function PainBoardSection({ pains, setPains }) {
       {solvingPainId !== null && (
         <div className="modal-overlay">
           <div className="modal-card page-spring-entry">
-            <h3 className="modal-title">Solve this Pain</h3>
-            <p className="modal-subtitle">
-              Link a tool or solution to: <span className="italic">{pains.find(p => p.id === solvingPainId)?.text}</span>
-            </p>
-            
-            <div className="modal-form">
-              <label className="modal-label">Tool Name</label>
-              <input 
-                type="text" 
-                className="modal-input" 
-                placeholder="e.g. Chatglider"
-                value={toolName}
-                onChange={(e) => setToolName(e.target.value)}
-                style={{ borderColor: formError && !toolName.trim() ? 'var(--open-text)' : '' }}
-              />
-              
-              <label className="modal-label">Tool URL</label>
-              <input 
-                type="text" 
-                className="modal-input" 
-                placeholder="e.g. chatglider.ark.build"
-                value={toolUrl}
-                onChange={(e) => setToolUrl(e.target.value)}
-                style={{ borderColor: formError && !toolUrl.trim() ? 'var(--open-text)' : '' }}
-              />
-
-              <label className="modal-label">How it solves the pain (optional)</label>
-              <textarea 
-                className="modal-textarea" 
-                placeholder="Brief explanation..."
-                value={toolDescription}
-                onChange={(e) => setToolDescription(e.target.value)}
-              />
-
-              <div className="modal-actions">
-                <button className="modal-btn modal-btn--cancel" onClick={handleCloseSolveModal}>
-                  Cancel
-                </button>
-                <button className="modal-btn modal-btn--submit" onClick={handleSolveSubmit}>
-                  Submit Solution
+            {isSubmitted ? (
+              <div className="modal-success">
+                <div className="modal-success__icon">✓</div>
+                <h3 className="modal-title">Submitted for Review!</h3>
+                <p className="modal-subtitle">
+                  Your solution has been submitted. Our team will verify the link and approve it shortly.
+                </p>
+                <button className="modal-btn modal-btn--submit" onClick={handleCloseSolveModal}>
+                  Done
                 </button>
               </div>
-            </div>
+            ) : (
+              <>
+                <h3 className="modal-title">Solve this Pain</h3>
+                <p className="modal-subtitle">
+                  Link a tool or solution to: <span className="italic">{pains.find(p => p.id === solvingPainId)?.text}</span>
+                </p>
+                
+                <div className="modal-form">
+                  <label className="modal-label">Tool Name *</label>
+                  <input 
+                    type="text" 
+                    className="modal-input" 
+                    placeholder="e.g. Chatglider"
+                    value={toolName}
+                    onChange={(e) => setToolName(e.target.value)}
+                    style={{ borderColor: formError && !toolName.trim() ? 'var(--open-text)' : '' }}
+                  />
+                  
+                  <label className="modal-label">Tool URL *</label>
+                  <input 
+                    type="text" 
+                    className="modal-input" 
+                    placeholder="e.g. chatglider.ark.build"
+                    value={toolUrl}
+                    onChange={(e) => setToolUrl(e.target.value)}
+                    style={{ borderColor: formError && !toolUrl.trim() ? 'var(--open-text)' : '' }}
+                  />
+
+                  <label className="modal-label">How it solves the pain (optional)</label>
+                  <textarea 
+                    className="modal-textarea" 
+                    placeholder="Brief explanation..."
+                    value={toolDescription}
+                    onChange={(e) => setToolDescription(e.target.value)}
+                  />
+
+                  <label className="modal-label">Photo / Screenshot (optional)</label>
+                  <div
+                    className={`photo-upload-zone photo-upload-zone--compact ${photoPreview ? 'has-photo' : ''}`}
+                    onClick={() => fileInputRef.current?.click()}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const file = e.dataTransfer.files[0];
+                      if (file && file.type.startsWith('image/')) {
+                        setPhotoFile(file);
+                        const reader = new FileReader();
+                        reader.onload = (ev) => setPhotoPreview(ev.target.result);
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  >
+                    {photoPreview ? (
+                      <div className="photo-upload-zone__preview">
+                        <img src={photoPreview} alt="Preview" />
+                        <button
+                          className="photo-upload-zone__remove"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPhotoFile(null);
+                            setPhotoPreview(null);
+                          }}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="photo-upload-zone__placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="photo-upload-zone__icon">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <path d="m21 15-5-5L5 21" />
+                        </svg>
+                        <span>Click or drop image</span>
+                      </div>
+                    )}
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      onChange={handlePhotoChange}
+                    />
+                  </div>
+
+                  <div className="modal-divider"></div>
+
+                  <p className="modal-section-label">About You (optional)</p>
+                  <div className="modal-row">
+                    <div className="modal-row__field">
+                      <label className="modal-label">Your Name</label>
+                      <input 
+                        type="text" 
+                        className="modal-input" 
+                        placeholder="e.g. John"
+                        value={contributorName}
+                        onChange={(e) => setContributorName(e.target.value)}
+                      />
+                    </div>
+                    <div className="modal-row__field">
+                      <label className="modal-label">Email</label>
+                      <input 
+                        type="email" 
+                        className="modal-input" 
+                        placeholder="e.g. john@email.com"
+                        value={contributorEmail}
+                        onChange={(e) => setContributorEmail(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="modal-actions">
+                    <button className="modal-btn modal-btn--cancel" onClick={handleCloseSolveModal}>
+                      Cancel
+                    </button>
+                    <button 
+                      className="modal-btn modal-btn--submit" 
+                      onClick={handleSolveSubmit}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Solution'}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

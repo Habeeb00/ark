@@ -13,7 +13,7 @@ export function ViewButton({ href = '#' }) {
   );
 }
 
-export function PainAction({ status, onClick, href = '#' }) {
+export function PainAction({ status, onClick, href = '#', hasPendingSolution }) {
   if (status === 'solved') {
     return (
       <a 
@@ -30,6 +30,9 @@ export function PainAction({ status, onClick, href = '#' }) {
         view tool <span className="arrow">→</span>
       </a>
     );
+  }
+  if (hasPendingSolution) {
+    return <span className="pain-item__action pain-item__action--pending">under review</span>;
   }
   return <button className="pain-item__action" onClick={onClick}>solve this</button>;
 }
