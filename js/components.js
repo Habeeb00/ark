@@ -204,7 +204,7 @@ const PROJECTS = [
     type: 'tool',
     title: 'Jugaad',
     description: 'A calendar integration for the Hub app of TinkerHub',
-    builders: [BUILDERS.aravind, BUILDERS.habeeb],
+    builders: [BUILDERS.habeeb],
   },
 ];
 

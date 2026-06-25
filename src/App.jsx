@@ -86,9 +86,6 @@ function App() {
   if (route === '/manifesto') {
     return <ManifestoPage onNavigate={navigate} />;
   }
-  if (route === '/manifesto') {
-    return <ManifestoPage onNavigate={navigate} />;
-  }
   
   if (route === '/blog') {
     return <BlogPage onNavigate={navigate} />;

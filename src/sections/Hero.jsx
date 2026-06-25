@@ -44,7 +44,7 @@ export function Hero({ onNavigate, pains }) {
         </div>
       </div>
       <div className="hero__image animate-fade-in delay-300">
-        <img src="assets/hero-ark.png" alt="Noah's Ark represented in a vintage dither art style" />
+        <img src="assets/hero-hands.png" alt="Two hands reaching towards each other — representing connection and building together" />
       </div>
 
       {trendingTool && (

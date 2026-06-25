@@ -75,7 +75,7 @@ export const PROJECTS = [
     type: 'product',
     title: 'The Billboard',
     description: 'Built because annoying billboards in cities felt like a pain worth solving.',
-    builders: [BUILDERS.aravind, BUILDERS.habeeb],
+    builders: [BUILDERS.habeeb],
     href: 'https://thebillboard.site',
   },
   {
@@ -83,7 +83,7 @@ export const PROJECTS = [
     type: 'tool',
     title: 'Jugaad',
     description: 'A calendar integration for the Hub app of TinkerHub.',
-    builders: [BUILDERS.aravind, BUILDERS.habeeb],
+    builders: [BUILDERS.habeeb],
     href: 'https://jugadhub.vercel.app/',
   },
 ];

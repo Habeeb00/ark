@@ -116,6 +116,7 @@ body {
   color: var(--dark5);
   overflow-x: hidden;
   line-height: 1;
+  zoom: 0.9;
 }
 
 a {
@@ -305,7 +306,7 @@ ol {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: bottom center;
+  object-position: center 40%;
 }
 
 /* Trending Tool Widget */
@@ -1574,10 +1575,10 @@ ol {
 .manifesto__body {
   font-family: var(--font-satoshi);
   font-weight: 500;
-  font-size: 30px;
+  font-size: 22px;
   color: var(--dark4);
-  line-height: normal;
-  max-width: 984px;
+  line-height: 1.6;
+  max-width: 100%;
 }
 
 .manifesto__body p {
@@ -1731,7 +1732,7 @@ ol {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: bottom center;
+    object-position: center 40%;
   }
 
   /* Responsive Trending Widget */
@@ -1952,7 +1953,7 @@ ol {
   }
 
   .manifesto__body {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .footer__cta-heading {
