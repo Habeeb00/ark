@@ -20,8 +20,9 @@ export function ManifestoPage({ onNavigate }) {
             <p>ark exists to shift that back. a pain point should not be ignored just because it won't generate revenue or because only a few people face it. even the smallest pain matters.</p>
 
             <p>if you felt something was annoying, confusing or unnecessary, it's worth fixing. build for it, share it, so someone else doesn't have to feel it again.<br />
-            that's what ark is — just people building for pains, not for scale.<br />
-            let's solve the pains of the internet.</p>
+
+              we're just people building for pains, not for scale.<br />
+            </p>
           </div>
 
           <div className="manifesto__builders animate-fade-in-up delay-400">
