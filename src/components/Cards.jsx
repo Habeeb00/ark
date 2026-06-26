@@ -50,7 +50,11 @@ export function LargeTile({ project }) {
           <ViewButton href={project.href} />
         </div>
       </div>
-      <div className="card__image-area"></div>
+      <div className="card__image-area">
+        {project.image && (
+          <img src={project.image} alt={project.title} className="card__image" />
+        )}
+      </div>
     </div>
   );
 }

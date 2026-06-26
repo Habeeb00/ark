@@ -84,7 +84,7 @@ function SmallTile({ type, title, description, builders, href = '#' }) {
  * @param {string} [data.href] - Link
  * @returns {string} HTML string
  */
-function LargeTile({ type, title, description, usage = '', builders, href = '#' }) {
+function LargeTile({ type, title, description, usage = '', builders, href = '#', image }) {
   return `<div class="card card--large">
     <div class="card__content-area">
       <div class="card__top">
@@ -100,7 +100,9 @@ function LargeTile({ type, title, description, usage = '', builders, href = '#' 
         ${ViewButton(href)}
       </div>
     </div>
-    <div class="card__image-area"></div>
+    <div class="card__image-area">
+      ${image ? `<img src="${image}" alt="${title}" class="card__image" />` : ''}
+    </div>
   </div>`;
 }
 
@@ -181,6 +183,7 @@ const PROJECTS = [
     usage: 'Used by many',
     builders: [BUILDERS.aravind, BUILDERS.habeeb],
     large: true,
+    image: 'assets/linkspaces.png',
   },
   {
     type: 'tool',

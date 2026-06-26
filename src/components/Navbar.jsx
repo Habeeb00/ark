@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export function Navbar({ activePage, onNavigate, onSearchOpen }) {
   const [opacity, setOpacity] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
   const lastScroll = useRef(0);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export function Navbar({ activePage, onNavigate, onSearchOpen }) {
 
   const handleLinkClick = (e, path) => {
     e.preventDefault();
+    setMenuOpen(false); // Close menu on navigation
     if (onNavigate) {
       onNavigate(path);
     } else {
@@ -34,7 +36,8 @@ export function Navbar({ activePage, onNavigate, onSearchOpen }) {
           <img src="/assets/ark-logo.svg" alt="ark logo" style={{ height: '100%', width: 'auto' }} />
         </a>
       </div>
-      <div className="navbar__links">
+      
+      <div className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
         <a 
           href="/manifesto" 
           className={activePage === 'manifesto' ? 'active' : ''} 
@@ -62,6 +65,9 @@ export function Navbar({ activePage, onNavigate, onSearchOpen }) {
         >
           submit tool
         </a>
+      </div>
+
+      <div className="navbar__actions">
         <button 
           className="navbar__search-btn"
           onClick={onSearchOpen}
@@ -72,6 +78,18 @@ export function Navbar({ activePage, onNavigate, onSearchOpen }) {
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.3-4.3" />
           </svg>
+        </button>
+
+        <button 
+          className={`navbar__burger ${menuOpen ? 'navbar__burger--open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className="burger-text">{menuOpen ? 'close' : 'menu'}</span>
+          <div className="burger-icon">
+            <span className="burger-line"></span>
+            <span className="burger-line"></span>
+          </div>
         </button>
       </div>
     </nav>

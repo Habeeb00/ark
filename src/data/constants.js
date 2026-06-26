@@ -21,6 +21,7 @@ export const PROJECTS = [
     builders: [BUILDERS.aravind, BUILDERS.habeeb],
     href: 'https://linkspaces.me/',
     large: true,
+    image: 'assets/linkspaces.png',
   },
   {
     id: 2,
